@@ -13,3 +13,29 @@
 .rouge {
     border: 2px solid red;
 }
+
+[role="tablist"] {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+button[role="tab"] {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 16px;
+}
+
+button[role="tab"][aria-selected="true"] {
+    border-bottom-color: #007bff;
+    font-weight: bold;
+    color: #007bff;
+}
+
+[hidden] {
+    display: none !important;
+}

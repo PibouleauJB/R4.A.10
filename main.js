@@ -1,4 +1,3 @@
-
 let I_i = 0;
 let A_valeurs=[];
 let A_couleurs = ["bleu","vert","orange","rouge"];
@@ -19,7 +18,14 @@ function showTemp() {
     }
     let data = document.getElementById("tempList");
     let text = document.getElementById("tempText");
-    data.textContent = A_valeurs[I_i];
+    data.textContent = A_valeurs[I_i] + "°C";
+
+    const historyList = document.getElementById('historyList');
+    if (historyList) {
+        const separator = historyList.textContent ? " ; " : "";
+        historyList.textContent += separator + A_valeurs[I_i];
+    }
+
     console.log(A_valeurs[I_i]);
     if (A_valeurs[I_i] < 0){
         console.log("bleu");
@@ -29,7 +35,7 @@ function showTemp() {
     else if (A_valeurs[I_i] >= 0 && A_valeurs[I_i] < 20){
         console.log("vert");
         data.className = "vert";
-        text.textContent = "\n";
+        text.textContent = "";
     }
     else if (A_valeurs[I_i] >= 20 && A_valeurs[I_i] < 30){
         console.log("orange");
@@ -44,3 +50,26 @@ function showTemp() {
 }
 
 const intervalID = setInterval(showTemp,1000);
+
+const tabs = document.querySelectorAll('[role="tab"]');
+const panels = document.querySelectorAll('[role="tabpanel"]');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        // Désactiver tous les onglets
+        tabs.forEach(t => {
+            t.setAttribute('aria-selected', 'false');
+            t.setAttribute('tabindex', '-1');
+        });
+
+        panels.forEach(p => {
+            p.hidden = true;
+        });
+
+        e.target.setAttribute('aria-selected', 'true');
+        e.target.setAttribute('tabindex', '0');
+
+        const panelId = e.target.getAttribute('aria-controls');
+        document.getElementById(panelId).hidden = false;
+    });
+});

@@ -8,8 +8,23 @@
 <body>
 <section>
     <h1>Température</h1>
+    <div role="tablist" aria-label="Sections du tableau de bord">
+        <button role="tab" aria-selected="true" aria-controls="panel-donnees" id="tab-donnees">
+            Données
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="panel-historique" id="tab-historique" tabindex="-1">
+            Historique
+        </button>
+    </div>
+
+    <div id="panel-donnees" role="tabpanel" tabindex="0" aria-labelledby="tab-donnees">
         <p id="tempText"></p>
-        <p id="tempList"></p>
+        <p id="tempList" aria-live="polite"></p>
+    </div>
+
+    <div id="panel-historique" role="tabpanel" tabindex="0" aria-labelledby="tab-historique" hidden>
+        <p id="historyList"></p>
+    </div>
 
 </section>
     <script src="main.js"></script>
